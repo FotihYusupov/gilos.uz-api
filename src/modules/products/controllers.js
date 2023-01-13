@@ -1,4 +1,4 @@
-import { addProduct, byCategory, deleteProduct, getProduct, getProducts, searchProduct, updateProduct } from './model.js'
+import { addProduct, byCategory, deleteProduct, getCategories, getProduct, getProducts, searchProduct, updateProduct } from './model.js'
 import fs from "fs"
 import path from "path";
 
@@ -116,5 +116,19 @@ export default {
             status: 200,
             data
         })
+    },
+    GET_CATEGORIES: async (req, res) => {
+        const data = await getCategories()
+        if(data){
+            res.status(200).json({
+                status: 200,
+                data
+            })
+        } else {
+            res.status(400).json({
+                status: 400,
+                message: 'error'
+            })
+        }
     }
 }

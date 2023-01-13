@@ -68,6 +68,10 @@ const by_category = `
         category_id = $1
 `
 
+const get_categories = `
+    select * from categories
+`
+
 export const addProduct = (product_name, product_body, product_price, product_img, categorie_id) => 
     fetchData(add_product, product_name, product_body, product_price, product_img, categorie_id) 
 
@@ -83,3 +87,5 @@ export const searchProduct = product_name => fetchData(search_product, product_n
 export const byCategory = id => fetch(by_category, id)
 
 export const getProduct = id => fetch(get_product, id)
+
+export const getCategories = () => fetchData(get_categories)
