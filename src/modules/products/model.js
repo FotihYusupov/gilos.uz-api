@@ -65,7 +65,7 @@ const by_category = `
     on
         products.category_id = categories.category_id
     where
-        category_id = $1
+        products.category_id = $1
 `
 
 const get_categories = `
@@ -84,7 +84,7 @@ export const updateProduct = (product_name, product_body, product_price, product
 
 export const searchProduct = product_name => fetchData(search_product, product_name)
 
-export const byCategory = id => fetch(by_category, id)
+export const byCategory = id => fetchData(by_category, id)
 
 export const getProduct = id => fetch(get_product, id)
 

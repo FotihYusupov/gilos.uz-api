@@ -23,7 +23,8 @@ export default {
     GET_PRODUCT: async (req, res) => {
         try {
             const { id } = req.params
-            const foundProduct = getProduct(id)
+            const foundProduct = await getProduct(id)
+            foundProduct.product_img = host + foundProduct.product_img
             if(foundProduct){
                 res.status(200).json({
                     status: 200,
@@ -100,7 +101,11 @@ export default {
         try {
             const { name } = req.params
             const product_name = '%' + name + '%'
-            const data = await searchProduct(product_name)
+            let data = await searchProduct(product_name)
+            data = data.map(product => {
+                product.product_img = `${host}${product.product_img}`
+                return product
+            })
             res.status(200).json({
                 status: 200,
                 data,
@@ -111,13 +116,17 @@ export default {
     },
     BY_CATEGORY: async (req, res) => {
         const { id } = req.params
-        const data = await byCategory(id)
+        let data = await byCategory(id)
+        data = data.map(product => {
+            product.product_img = `${host}${product.product_img}`
+            return product
+        })
         res.status(200).json({
             status: 200,
             data
         })
     },
-    GET_CATEGORIES: async (req, res) => {
+    GET_CATEGORIES: async (_, res) => {
         const data = await getCategories()
         if(data){
             res.status(200).json({

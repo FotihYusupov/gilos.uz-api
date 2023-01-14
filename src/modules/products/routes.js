@@ -10,6 +10,7 @@ export default productRoutes
     .get('/search/:name', controllers.SEARCH_PRODUCT)
     .get('/product/:id', controllers.GET_PRODUCT)
     .get('/categories', controllers.GET_CATEGORIES)
+    .get('/by-categorie/:id', controllers.BY_CATEGORY)
     .post('/add-product', adminControllers.VERIFICATION ,controllers.ADD_PRODUCT)
     .put('/update-product/:id', adminControllers.VERIFICATION, controllers.UPDATE_PRODUCT)
     .delete('/delete/:id', adminControllers.VERIFICATION, controllers.DELTE_PRODUCT)
